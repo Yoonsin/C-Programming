@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 
 class BaseArray {
 private:
@@ -15,11 +16,31 @@ protected:
 };
 
 class MyStack :public BaseArray {
-
+public:
+	int index;
+	MyStack(int n) : BaseArray(n) { this->index == 0; }
+	int length() { return this->index; }
+	void push(int n) { put(this->index, n); this->index++; }
+	int pop() {  return get(--this->index); }
+	int capacity(){return this->getCapacity();}
 };
 
 int main(void)
 {
-	
+	MyStack mStack(100);
+	int n;
+	cout << "스택에 삽입할 5개의 정수를 입력하라 >> ";
+	for (int i = 0; i < 5; i++) {
+		cin >> n;
+		mStack.push(n);
+	}
+	cout << "스택용량:" << mStack.capacity() << ", 스택크기:" << mStack.length() << endl;
+	cout << "스택의 모든 원소를 팝하여 출력한다>> ";
+	while (mStack.length() != 0) {
+		cout << mStack.pop() << ' ';
+	}
+
+	cout << endl << "스택의 현재 크기 : " << mStack.length() << endl;
+
 	return 0;
 }
