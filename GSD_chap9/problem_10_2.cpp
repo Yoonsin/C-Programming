@@ -73,6 +73,7 @@ int UI::cnt = 0;
 class GraphicEditor {
 	Shape* pStart;
 	Shape* pLast;
+	Shape* p;
 	int cnt;
 	bool updateFlag;
 public:
@@ -92,7 +93,6 @@ public:
 	void update() {
 		while (updateFlag != true)
 		{
-			cout << this->cnt;
 			switch (UI::printUi()) {
 			case 1:
 				switch (UI::printInsertUi())
@@ -108,6 +108,7 @@ public:
 					break;
 				default:
 					cout << "잘못 입력했습니다.";
+					break;
 				}
 				break;
 			case 2:
@@ -118,6 +119,12 @@ public:
 				}
 				this->pStart=UI::printDeleteUi(this->pStart);
 				this->cnt--;
+				p = this->pStart;
+				while (p!=NULL &&p->getNext() != NULL) //링크드 리스트에 원소가 2개이상 있을 때는 p 맨끝까지 가고 NULL해주기 (중간에 삭제됐을 때 this->pLast 값을 갱신시켜줘야함)
+					{
+						p = p->getNext();
+					}
+				this->pLast = p;
 				break;
 			case 3:
 				UI::printSeekUi(this->pStart);
@@ -125,7 +132,9 @@ public:
 			case 4:
 				updateFlag = true;
 				break;
-
+			default:
+				cout << "잘못 입력했습니다.";
+				break;
 
 			}
 		}
