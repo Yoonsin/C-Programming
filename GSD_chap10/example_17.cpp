@@ -5,8 +5,10 @@ using namespace std;
 int main() {
 	double pi = 3.14;
 
-	auto clac = [pi](int r) -> double { return pi * r * r;};
+	int r;
+	cout << "반지름을 입력하세요: ";
+	cin >> r;
 
-	cout << "면적은 " << clac(3);
-
+	auto calc = [pi](int r) -> double {return r * r * pi; };
+	cout << calc(r);
 }
